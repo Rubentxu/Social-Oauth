@@ -1499,3 +1499,13 @@ div.footer img
 /* end LayoutCell, sidebar1 */
 
 
+input.error, textarea.error {
+    color: red;
+    background-color: yellow;
+}
+
+input.error[type="radio"], input.error[type="checkbox"], select.error {
+    background-color: white;
+    border: 2px solid red;
+}
+
