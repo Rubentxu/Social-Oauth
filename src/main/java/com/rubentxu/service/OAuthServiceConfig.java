@@ -8,6 +8,7 @@ public class OAuthServiceConfig {
     private String apiSecret;
     private String callback;
     private Class apiClass;
+    private String scope;
 
     public OAuthServiceConfig() {
     }
@@ -19,6 +20,16 @@ public class OAuthServiceConfig {
         this.apiSecret = apiSecret;
         this.callback = callback;
         this.apiClass = apiClass;
+    }
+
+    public OAuthServiceConfig(String apiKey, String apiSecret,String callback,
+                              Class apiClass,String scope) {
+        super();
+        this.apiKey = apiKey;
+        this.apiSecret = apiSecret;
+        this.callback = callback;
+        this.apiClass = apiClass;
+        this.scope=scope;
     }
 
     public String getApiKey() {
@@ -53,4 +64,17 @@ public class OAuthServiceConfig {
         this.apiClass = apiClass;
     }
 
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("OAuthServiceConfig{ apiKey= %s , apiSecret=  %s, callback= %s, apiClass= %s ,scope= %s"
+                ,apiKey , apiSecret ,callback ,apiClass,scope );
+    }
 }

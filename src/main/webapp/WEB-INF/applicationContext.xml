@@ -28,4 +28,16 @@
         <constructor-arg name="config" ref="facebookServiceConfig" />
     </bean>
 
+    <bean id="googleServiceConfig" class="com.rubentxu.service.OAuthServiceConfig">
+        <constructor-arg value="${app.config.oauth.google.apikey}" />
+        <constructor-arg value="${app.config.oauth.google.apisecret}"/>
+        <constructor-arg value="${app.config.oauth.google.callback}"/>
+        <constructor-arg value="org.scribe.builder.api.GoogleApi"/>
+        <constructor-arg value="${app.config.oauth.google.scope}"/>
+    </bean>
+
+    <bean id="googleServiceProvider" class="com.rubentxu.service.provider.OAuthServiceProvider">
+        <constructor-arg name="config" ref="googleServiceConfig" />
+    </bean>
+
 </beans>

@@ -10,8 +10,8 @@
             </s:link>
         </p>
         <p>
-            <s:link beanclass="com.rubentxu.action.FacebookActionBean" event="loginFacebook">
-                Login Twiter...
+            <s:link beanclass="com.rubentxu.action.GoogleActionBean" event="loginGoogle">
+                Login Google...
             </s:link>
         </p>
     </s:layout-component>
