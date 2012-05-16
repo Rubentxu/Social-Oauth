@@ -1,18 +1,18 @@
 package com.rubentxu.action;
 
 import com.rubentxu.service.provider.OAuthServiceProvider;
-import com.rubentxu.vo.UsuarioFacebookVO;
-import com.rubentxu.vo.UsuarioGoogleVO;
 import net.sourceforge.stripes.action.*;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.SimpleError;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.scribe.model.*;
 import org.scribe.oauth.OAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Map;
 
 @UrlBinding("/SocialPruebas/google/{$event}.htm")
 public class GoogleActionBean extends BaseActionBean {
@@ -22,8 +22,7 @@ public class GoogleActionBean extends BaseActionBean {
     private OAuthServiceProvider googleServiceProvider;
     private String oauth_verifier;
     private String oauth_token;
-    private String body;
-    private UsuarioGoogleVO usuario;
+    Map<String, Object> respuestaJson;
     private static final String NETWORK_NAME = "Google";
     private static final String AUTHORIZE_URL = "https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token=";
     private static final String PROTECTED_RESOURCE_URL = "https://www.google.com/m8/feeds/contacts/default/full?alt=json";
@@ -54,18 +53,18 @@ public class GoogleActionBean extends BaseActionBean {
         service.signRequest(accessToken, oauthRequest);
         Response oauthResponse = oauthRequest.send();
 
-        this.body = oauthResponse.getBody();
+        String body = oauthResponse.getBody();
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            this.usuario = mapper.readValue(body, UsuarioGoogleVO.class);
-            logger.debug("Usuario nombre es: {}",usuario.getName());
+
+           respuestaJson = mapper.readValue(body, new TypeReference<Map<String, Object>>() {});
         } catch (IOException e) {
             logger.error("El mapeado de Json fallo : {}",e.getMessage());
             getContext().getValidationErrors().addGlobalError(new SimpleError("error.excepcion.jackson", e.getMessage()));
         }
 
-        logger.debug("La respuesta  body: {}", this.body);
+        logger.debug("La respuesta  body: {}", body);
         return new ForwardResolution("/WEB-INF/jsp/google.jsp");
 
     }
@@ -91,12 +90,12 @@ public class GoogleActionBean extends BaseActionBean {
         logger.debug("Se va a conectar al servicio de google: ");
         service.signRequest(accessToken, oauthRequest);
         Response oauthResponse = oauthRequest.send();
-        this.body = oauthResponse.getBody();
+        String body = oauthResponse.getBody();
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            this.usuario = mapper.readValue(body, UsuarioGoogleVO.class);
-            logger.debug("Usuario nombre es: {}",usuario.getName());
+            respuestaJson = mapper.readValue(body, new TypeReference<Map<String, Object>>() {});
+
         } catch (IOException e) {
             getContext().getValidationErrors().addGlobalError(new SimpleError("error.excepcion.jackson", e.getMessage()));
         }
@@ -129,21 +128,9 @@ public class GoogleActionBean extends BaseActionBean {
         this.oauth_verifier = oauth_verifier;
     }
 
-
-    public void setBody(String body) {
-        this.body = body;
+    public Map<String, Object> getRespuestaJson() {
+        return respuestaJson;
     }
 
-    public String getBody( ) {
-        return body;
-    }
-
-    public UsuarioGoogleVO getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioGoogleVO usuario) {
-        this.usuario = usuario;
-    }
 
 }

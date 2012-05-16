@@ -5,7 +5,8 @@
         <p>Proyecto de Pruebas Social Google</p>
         <stripes:errors globalErrorsOnly="true"/>
 
-        <p> Cuerpo JSON: ${actionBean.body} </p>
+        <p> Nombre Usuario: ${actionBean.respuestaJson.feed.author[0].name.$t} </p>
+        <p> Email Usuario: ${actionBean.respuestaJson.feed.author[0].email.$t} </p>
 
 
 

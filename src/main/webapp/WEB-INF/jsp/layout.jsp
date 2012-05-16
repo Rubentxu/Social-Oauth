@@ -41,13 +41,24 @@
                     <div class="nav-outer">
                         <ul class="hmenu">
                             <li>
-                                <a href="./new-page.html" class="active"><span class="l"></span><span
+                                <s:link beanclass="com.rubentxu.action.FacebookActionBean" event="loginFacebook"
+                                        class="active">
+                                    <span class="l"></span><span
                                         class="r"></span><span
-                                        class="t">PaginaUno</span></a>
+                                        class="t"> Facebook
+                                         </span>
+                                </s:link>
                             </li>
                             <li>
-                                <a href="#"><span class="l"></span><span class="r"></span><span
-                                        class="t">PaginaDos</span></a>
+                                <s:link beanclass="com.rubentxu.action.GoogleActionBean" event="loginGoogle">
+                                    <span class="l"></span>
+                                    <span class="r"></span>
+                                    <span
+                                            class="t">
+                                        Google
+                                        </span>
+                                </s:link>
+
                             </li>
                         </ul>
                     </div>
@@ -130,9 +141,11 @@
 
                         <div class="footer-text">
 
-                            <p><a href="#">Link1</a> | <a href="#">Link2</a> | <a href="#">Link3</a></p>
+                            <p><a href="https://github.com/Rubentxu/Social-Oauth">Codigo de la Aplicacion en GitHub</a>
 
-                            <p>Copyright © 2012. All Rights Reserved Rubentxu</p>
+                            </p>
+
+                            <p>Licencia AGPL .Creado por Rubentxu</p>
 
 
                         </div>
@@ -143,9 +156,7 @@
             </div>
         </div>
         <div class="cleared"></div>
-        <p class="page-footer"><a href="http://www.artisteer.com/?p=website_templates">Website Template</a> created
-            with
-            Artisteer.</p>
+        <p class="page-footer">Licencia AGPL .Creado por Rubentxu</p>
 
         <div class="cleared"></div>
     </div>
